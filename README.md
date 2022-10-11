@@ -4,6 +4,16 @@
 
 Arduino based project for a custom Nixie clock made with four IN-8 tubes.
 
+The clock has the followings functionalities :
+
+- Time can be edited easily
+- The hours can be displayed in 12h or 24h format
+- The leading zero on the hours can be hidden 
+- Eco mode allows to turn off the tubes between an editable time period
+- Bypass possibility of the eco mode for one period by pressing a button
+- RTC allows for keeping track of time when the clock is unpowered
+- Settings also saved on the RTC for when the clock in unpowered
+
 
 
 ## Components
@@ -15,6 +25,7 @@ The clock uses the following components :
 - a [DS3231 RTC](https://www.amazon.fr/gp/product/B07WJSQ6M2/ref=ppx_yo_dt_b_asin_title_o01_s00?ie=UTF8&psc=1) module for an accurate time reading (and to keep time when the clock is not powered)
 - four F155ID1 74141 tube drivers (74141 version allows for no output state, which is needed for the "hide leading zero" function)
 - two SN74HC595N shift registers in series to manage the tube drivers
+- two buttons to manage the different functions
 
 
 
@@ -28,6 +39,8 @@ The project depends on two libraries to communicate with the RTC module :
 
 
 ## PCB
+
+PCB created on EasyEDA v6.5.1.
 
 
 

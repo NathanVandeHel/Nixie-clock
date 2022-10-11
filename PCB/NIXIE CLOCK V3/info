@@ -1,0 +1,212 @@
+{
+  "uuid": "aaa4fb7224314c1b6128f0ab6c23ffda",
+  "path": "Offline/NIXIE%20CLOCK%20V3",
+  "name": "NIXIE CLOCK V3",
+  "content": "",
+  "created_at": "2022-04-24 16:42:32",
+  "updated_at": "2022-07-19 17:37:03",
+  "stick": "",
+  "documents": [
+    {
+      "uuid": "a01f7a057259c42f727b312a2d2f1251",
+      "title": "Sheet_1",
+      "description": "",
+      "docType": "1",
+      "master": "",
+      "thumb": "/images/thumb-default.png",
+      "components": {
+        "081a7d2d567949069fc7333d270da27e": 2,
+        "ad221d7ecdd946bf83ba17a787fab240": 5,
+        "017f3e47c5614a6488fa22a5c64c254d": 1,
+        "98aed6cb8c4d42548196d630228ecb57": 4,
+        "631930c3ac824a7a8c2f72252da4e208": 4,
+        "977e7d941132473abc43114b3b51c607": 1,
+        "31c35cdd0eb74348aa43f6344ae9fa91": 1,
+        "c0db19768377413e946c19acdf6d5447": 1,
+        "a6ffded091404c16acbea028c901c6b6": 1,
+        "adca215d3b7144f4a5872c38e2ce6e84": 1
+      },
+      "BOM": [
+        [
+          "Value",
+          "Quantity",
+          "Package",
+          "Components",
+          "CustomPara"
+        ],
+        [
+          "826926-2",
+          1,
+          "HDR-M-2.54_1X2",
+          "J1",
+          {
+            "BOM_Manufacturer Part": "TE",
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "Mouser",
+            "puuid": "70aa5812f21f4991bf427395d51849f4",
+            "uuid": "adca215d3b7144f4a5872c38e2ce6e84"
+          }
+        ],
+        [
+          "IN-8",
+          4,
+          "IN-8",
+          "N1,N2,N3,N4",
+          {
+            "BOM_Manufacturer Part": "",
+            "puuid": "8a7a99799655468ebbbdf765a84b78d0",
+            "uuid": "631930c3ac824a7a8c2f72252da4e208"
+          }
+        ],
+        [
+          "12K",
+          5,
+          "R0805",
+          "R1,R5,R6,R7,R8",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Supplier Part": "C336850",
+            "BOM_Manufacturer": "PANASONIC",
+            "BOM_Manufacturer Part": "ERJ6RBD1202V",
+            "puuid": "769626f169ec49d9867bc27eb696b6b9",
+            "uuid": "ad221d7ecdd946bf83ba17a787fab240"
+          }
+        ],
+        [
+          "K2-1102BQ-C4CW-01",
+          2,
+          "KEY-TH_K2-1102BQ-E4CW-01",
+          "SW1,SW2",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer": "HRO",
+            "BOM_Manufacturer Part": "K2-1102BQ-C4CW-01",
+            "BOM_Supplier Part": "C145894",
+            "puuid": "bc4b53ca9b1c4c75808e5ef61bc1895a",
+            "uuid": "081a7d2d567949069fc7333d270da27e"
+          }
+        ],
+        [
+          "SEEEDSTUDIO XIAO",
+          1,
+          "SEEED XIAO",
+          "U1",
+          {
+            "BOM_Manufacturer": "Seeedstudio",
+            "BOM_Manufacturer Part": "102010328",
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "puuid": "18909a18f0074ac38fb42acf0b8f7244",
+            "uuid": "017f3e47c5614a6488fa22a5c64c254d"
+          }
+        ],
+        [
+          "DS3231",
+          1,
+          "DS3231",
+          "U2",
+          {
+            "BOM_Manufacturer Part": "DS3231",
+            "puuid": "752f889f87b746e985e8fb83cad5f51a",
+            "uuid": "a6ffded091404c16acbea028c901c6b6"
+          }
+        ],
+        [
+          "74HC595N",
+          1,
+          "DIP-16",
+          "U3",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Supplier Part": "C507175",
+            "BOM_Manufacturer": "HGSEMI",
+            "BOM_Manufacturer Part": "74HC595N",
+            "BOM_JLCPCB Part Class": "Extended Part",
+            "puuid": "f65524866eeb49938730738117a3b667",
+            "uuid": "c0db19768377413e946c19acdf6d5447"
+          }
+        ],
+        [
+          "74HC595N",
+          1,
+          "DIP-16_L20.0-W6.4-P2.54-LS7.6-BL",
+          "U4",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Supplier Part": "C507175",
+            "BOM_Manufacturer": "HGSEMI",
+            "BOM_Manufacturer Part": "74HC595N",
+            "BOM_JLCPCB Part Class": "Extended Part",
+            "puuid": "f2561f0fa47346d3a02d341f9e29ef9e",
+            "uuid": "31c35cdd0eb74348aa43f6344ae9fa91"
+          }
+        ],
+        [
+          "K155ID1",
+          4,
+          "K155ID1 FOOTPRINT",
+          "U5,U6,U7,U8",
+          {
+            "BOM_Manufacturer": "",
+            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "puuid": "8577c6abc51842d5a54556005c100599",
+            "uuid": "98aed6cb8c4d42548196d630228ecb57"
+          }
+        ],
+        [
+          "alim_nixie_170V",
+          1,
+          "ALIM_NIXIE_170V",
+          "U9",
+          {
+            "BOM_Manufacturer": "",
+            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "puuid": "ccdf01d9cc674edf81d44703e9d5b0fd",
+            "uuid": "977e7d941132473abc43114b3b51c607"
+          }
+        ]
+      ],
+      "updateTime": 1658243846,
+      "createTime": 1593361639,
+      "histories": [],
+      "created_at": "2020-06-28 18:27:19",
+      "updated_at": "2022-07-19 17:17:26"
+    },
+    {
+      "uuid": "b75518d9914e3720f984b992126b6c82",
+      "title": "PCB_2020-06-28_18-55-56",
+      "filename": "PCB_2020-06-28_18-55-56.json",
+      "description": "",
+      "docType": "3",
+      "master": "",
+      "thumb": "/images/thumb-default.png",
+      "components": {
+        "70aa5812f21f4991bf427395d51849f4": 1,
+        "752f889f87b746e985e8fb83cad5f51a": 1,
+        "ccdf01d9cc674edf81d44703e9d5b0fd": 1,
+        "f65524866eeb49938730738117a3b667": 1,
+        "8a7a99799655468ebbbdf765a84b78d0": 4,
+        "bc4b53ca9b1c4c75808e5ef61bc1895a": 2,
+        "769626f169ec49d9867bc27eb696b6b9": 5,
+        "18909a18f0074ac38fb42acf0b8f7244": 1,
+        "8577c6abc51842d5a54556005c100599": 4,
+        "f2561f0fa47346d3a02d341f9e29ef9e": 1
+      },
+      "BOM": [],
+      "updateTime": 1658245023,
+      "createTime": 1593363356,
+      "histories": [],
+      "created_at": "2020-06-28 18:55:56",
+      "updated_at": "2022-07-19 17:37:03"
+    }
+  ],
+  "sort": [],
+  "title": "NIXIE CLOCK V3",
+  "foldername": "NIXIE CLOCK V3",
+  "schfilename": "NIXIE CLOCK V3.json",
+  "schfilemtime": 1658243846641
+}
