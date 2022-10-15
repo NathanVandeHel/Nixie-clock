@@ -401,11 +401,11 @@ void updateStateMachine()
       hourOne = changedHourOne;
       minuteTen = changedMinuteTen;
       minuteOne = changedMinuteOne;
+
       Serial.print("Time : ");
       Serial.print(changedHourTen * 10 + changedHourOne);
       Serial.print(" : ");
       Serial.println(changedMinuteTen * 10 + changedMinuteOne);
-
 
       SHUTTER_MODE = ACTUAL_DIGIT_SELECTED + 5; // A bit clunky but easier than a lot of if else...
 
@@ -421,7 +421,10 @@ void updateStateMachine()
             else if (changedHourTen == 1)
             {
               changedHourTen = 2;
-              changedHourOne = 0; // Set the hour one to 0 if hour ten is 2, because hour one can only have a value from 0 to 4 if hour ten is 2
+              if (changedHourOne > 3)
+              {
+                changedHourOne = 0; // Set the hour one to 0 if it is superior to 3 when hour ten is 2, because hour one can only have a value from 0 to 3 in this case
+              }
             }
             else
             {
@@ -616,6 +619,7 @@ void updateStateMachine()
       {
         updateRuleEcoModeSettings();
         STATE = 1; // Go to next menu : Time set
+        initializeTimeSetMode();
       }
       else if (RB_LP)
       {
@@ -698,9 +702,9 @@ void checkEcoMode()
 
 void initializeTimeSetMode()
 {
-  changedHourTen = hourTen;
-  changedHourOne = hourOne;
-  changedMinuteTen = minuteTen;
-  changedMinuteOne = minuteOne;
+  changedHourTen = t.hour / 10;
+  changedHourOne = t.hour % 10;
+  changedMinuteTen = t.min / 10;
+  changedMinuteOne =t.min % 10;
   ACTUAL_DIGIT_SELECTED = 0;
 }
