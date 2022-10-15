@@ -1,5 +1,6 @@
 #include <Wire.h> 
 #include <ds3231.h>
+#include <FlashStorage.h>
 
 
 #define SR_OUTPUT_EN    2 //shift registers output enable (-OE), active low
@@ -64,6 +65,11 @@ uint8_t truthTableOne[11] = {0b0000,    // digit 0
 
 struct ts t;
 
+FlashStorage(rule_hide_leading_zero, bool);
+FlashStorage(rule_twelve_hours, bool);
+FlashStorage(rule_eco_mode_start, int);
+FlashStorage(rule_eco_mode_stop, int);
+
 bool RULE_HIDE_LEADING_ZERO_HOURS = true; // Hide the leading "0" when the hour is only one digit
 bool RULE_TWELVE_HOURS = false; // Displays the hour in 12 or 24 hours format
 uint8_t RULE_ECO_MODE_START_TIME = 0; // Start hour of the eco mode (tubes turned off)
@@ -120,6 +126,12 @@ void setup()
   DS3231_init(DS3231_CONTROL_INTCN);
 
   setEcoTime();
+
+  // Reading the saved rule settings on the emulated EEPROM
+  RULE_HIDE_LEADING_ZERO_HOURS = rule_hide_leading_zero.read();
+  RULE_TWELVE_HOURS = rule_twelve_hours.read();
+  RULE_ECO_MODE_START_TIME = rule_eco_mode_start.read();
+  RULE_ECO_MODE_STOP_TIME = rule_eco_mode_stop.read();
 }
 
 void loop() 
@@ -148,8 +160,6 @@ void updateTime()
   // Also apply the different rules
   separateHours();
   separateMinutes();
-
-  checkEcoTime();
 }
 
 // update the digits diplayed by the tubes
@@ -190,16 +200,6 @@ void separateMinutes()
 {
   minuteTen = t.min / 10;
   minuteOne = t.min % 10;
-}
-
-// Check if the year stored in the RTC as not changed. If so, set it back to the correct number
-void checkEcoTime()
-{
-  if(RULE_ECO_MODE_START_TIME != t.mday || RULE_ECO_MODE_STOP_TIME != t.year - 2000 )
-  {
-    Serial.println("Eco times on the RTC does not correspond to saved");
-    updateEcoTime();
-  }
 }
 
 void setEcoTime()
@@ -511,6 +511,7 @@ void updateStateMachine()
       // Button actions :
       if (LB_SP)
       {
+        updateRuleTwelveHoursSettings();
         STATE = 3; // Go to next menu : Hide leading zero selection
       }
       else if (RB_SP)
@@ -519,10 +520,12 @@ void updateStateMachine()
       }
       else if (LB_LP)
       {
+        updateRuleTwelveHoursSettings();
         STATE = 3; // Go to next menu : Hide leading zero selection
       }
       else if (RB_LP)
       {
+        updateRuleTwelveHoursSettings();
         STATE = 0; // Go to Display time
       }
       break;
@@ -547,6 +550,8 @@ void updateStateMachine()
 
       if (LB_SP)
       {
+        updateRuleHideLeadingZeroSettings();
+        RULE_ECO_MODE_START_TIME_SELECTED = true;
         STATE = 4; // Go to next menu : Eco mode selection
       }
       else if (RB_SP)
@@ -555,10 +560,13 @@ void updateStateMachine()
       }
       else if (LB_LP)
       {
+        updateRuleHideLeadingZeroSettings();
+        RULE_ECO_MODE_START_TIME_SELECTED = true;
         STATE = 4; // Go to next menu : Eco mode selection
       }
       else if (RB_LP)
       {
+        updateRuleHideLeadingZeroSettings();
         STATE = 0; // Go to Display time
       }
       break;
@@ -606,12 +614,43 @@ void updateStateMachine()
       }
       else if (LB_LP)
       {
+        updateRuleEcoModeSettings();
         STATE = 1; // Go to next menu : Time set
       }
       else if (RB_LP)
       {
+        updateRuleEcoModeSettings();
         STATE = 0; // Go to Display time
       }
+  }
+}
+
+void updateRuleTwelveHoursSettings()
+{
+  if(RULE_TWELVE_HOURS != rule_twelve_hours.read())
+  {
+    rule_twelve_hours.write(RULE_TWELVE_HOURS);
+  }
+}
+
+void updateRuleHideLeadingZeroSettings()
+{
+  if (RULE_HIDE_LEADING_ZERO_HOURS != rule_hide_leading_zero.read())
+  {
+    rule_hide_leading_zero.write(RULE_HIDE_LEADING_ZERO_HOURS);
+  }
+}
+
+void updateRuleEcoModeSettings()
+{
+  if (RULE_ECO_MODE_START_TIME != rule_eco_mode_start.read())
+  {
+    rule_eco_mode_start.write(RULE_ECO_MODE_START_TIME);
+  }
+
+  if (RULE_ECO_MODE_STOP_TIME != rule_eco_mode_stop.read())
+  {
+    rule_eco_mode_stop.write(RULE_ECO_MODE_STOP_TIME);
   }
 }
 
@@ -621,21 +660,6 @@ void updateClock()
   t.hour = changedHourTen * 10 + changedHourOne;
   t.min = changedMinuteTen * 10 + changedMinuteOne;
   DS3231_set(t);
-}
-
-// Update the RTC with a new year. The year on the RTC store the eco time slot in the following fashion : 
-//    - eco start time as the RTC's day
-//    - eco stop time as the tens of the RTC's year
-void updateEcoTime()
-{
-  t.mday = RULE_ECO_MODE_START_TIME;
-  t.year = 2000 + RULE_ECO_MODE_STOP_TIME; 
-  DS3231_set(t);
-
-  Serial.print("RTC day updated (eco mode start time) : ");
-  Serial.println(t.mday);
-  Serial.print("RTC year updated (eco mode stop time) : ");
-  Serial.println(t.year);
 }
 
 // Set the clock in eco mode (tubes turned off) if actual time is in set eco time slot
