@@ -4,15 +4,20 @@
 
 Arduino based project for a custom Nixie clock made with four IN-8 tubes.
 
-The clock has the followings functionalities :
+<img src="./assets/1665848351766.jpg" alt="1665848351766" style="zoom:20%;" />
 
+The clock has the followings functionalities / characteristics :
+
+- Can be USB powered (5V, 2A charger needed)
 - Time can be edited easily
 - The hours can be displayed in 12h or 24h format
 - The leading zero on the hours can be hidden 
 - Eco mode allows to turn off the tubes between an editable time period
 - Bypass possibility of the eco mode for one period by pressing a button
-- RTC allows for keeping track of time when the clock is unpowered
-- Settings also saved on the RTC for when the clock in unpowered
+- RTC allows to keep track of time when the clock is unpowered
+- All settings are saved on a emulated EEPROM to keep track of them when the clock is unpowered
+- 4x M3 mounting holes for installing the PCB in any custom case
+- Small PCB size
 
 
 
@@ -29,22 +34,42 @@ The clock uses the following components :
 
 
 
+## Characteristics
+
+| Characteristic                   | value                  |
+| :------------------------------- | ---------------------- |
+| Power input                      | 5V 2A                  |
+| PCB size                         | 140 x 34 mm, ep. 1.6mm |
+| Mounting holes                   | 4x M3, 132 x 26 mm     |
+| Digit distance : ten - one       | 24 mm                  |
+| Digit distance : hours - minutes | 32 mm                  |
+
+
+
 ## Dependencies
 
-The project depends on two libraries to communicate with the RTC module :
+The project depends on three libraries :
 
 - Wire
 - The [ds3231](https://github.com/rodan/ds3231) library by Petre Rodan (manual installation needed)
+- The [FlashStorage](https://github.com/cmaglie/FlashStorage) library by Cmaglie (manual installation needed)
 
 
 
 ## PCB
 
-PCB created on EasyEDA v6.5.1.
+PCB created on EasyEDA v6.5.1. project files and Gerber files can be found in the "PCB" folder.
 
+<img src="./assets/1665848351757.jpg" alt="1665848351757" style="zoom:20%;" />
 
+<img src="./assets/1665848351750-1665848755178-4.jpg" alt="1665848351750" style="zoom:20%;" />
+
+## Warnings
+
+At first I wanted to power the clock by the USB port of the XIAO. But I think it does not support the amps required by the 170V power supply. I fried on or two XIAO by doing this. The clock needs to be powered by the two pads situated above the 170V power supply (marked J1). The USB port on the XIAO is only used to upload the code, when the clock is powered by the pads. 
 
 ## Improvements
 
-- The RTC module battery cannot be replaced easily for now
+- The RTC module battery cannot be replaced easily for now, the battery is soldered in place. 
 
+- Pull-up resistors could be added at the inputs of the tube drivers to have no digits displayed when the clock is powered up (instead of the 0 displayed now)
