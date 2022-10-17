@@ -8,7 +8,7 @@ Arduino based project for a custom Nixie clock made with four IN-8 tubes.
 
 The clock has the followings functionalities / characteristics :
 
-- Can be USB powered (5V, 2A charger needed)
+- Can be USB powered (working voltage : 5 V)
 - Time can be edited easily
 - The hours can be displayed in 12h or 24h format
 - The leading zero on the hours can be hidden 
@@ -36,13 +36,15 @@ The clock uses the following components :
 
 ## Characteristics
 
-| Characteristic                   | value                  |
-| :------------------------------- | ---------------------- |
-| Power input                      | 5V 2A                  |
-| PCB size                         | 140 x 34 mm, ep. 1.6mm |
-| Mounting holes                   | 4x M3, 132 x 26 mm     |
-| Digit distance : ten - one       | 24 mm                  |
-| Digit distance : hours - minutes | 32 mm                  |
+| Characteristic                                               | Value                  |
+| :----------------------------------------------------------- | ---------------------- |
+| Voltage input                                                | 5 V                    |
+| Power consumption - time displayed (max, depends on digit displayed) | 600 mA                 |
+| Power consumption - eco mode                                 | 100 mA                 |
+| PCB size                                                     | 140 x 34 mm, ep. 1.6mm |
+| Mounting holes                                               | 4x M3, 132 x 26 mm     |
+| Digit distance : ten - one                                   | 24 mm                  |
+| Digit distance : hours - minutes                             | 32 mm                  |
 
 
 
@@ -67,6 +69,10 @@ PCB created on EasyEDA v6.5.1. project files and Gerber files can be found in th
 ## Warnings
 
 At first I wanted to power the clock by the USB port of the XIAO. But I think it does not support the amps required by the 170V power supply. I fried on or two XIAO by doing this. The clock needs to be powered by the two pads situated above the 170V power supply (marked J1). The USB port on the XIAO is only used to upload the code, when the clock is powered by the pads. 
+
+There is no protection against reverse voltage.
+
+
 
 ## Improvements
 
