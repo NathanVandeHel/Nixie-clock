@@ -187,7 +187,7 @@ void updateTubes(uint8_t tube1, uint8_t tube2,  uint8_t tube3, uint8_t tube4)
 void separateHours()
 {
   hourTen = RULE_TWELVE_HOURS && t.hour > 12 ? ((t.hour - 12) / 10) : (t.hour / 10);
-  if (RULE_HIDE_LEADING_ZERO_HOURS && hourTen == 0) // if the hide leadin zero urle is applicable, chage the hour ten to 10 to correspond to the no digit output in the truth table 
+  if (RULE_HIDE_LEADING_ZERO_HOURS && hourTen == 0) // if the hide leadin zero urle is applicable, change the hour ten to 10 to correspond to the no digit output in the truth table 
     hourTen = 10;
 
   hourOne = RULE_TWELVE_HOURS && t.hour > 12 ? ((t.hour - 12) % 10) : (t.hour % 10);
@@ -648,7 +648,7 @@ void updateClock()
 // Set the clock in eco mode (tubes turned off) if actual time is in set eco time slot
 void checkEcoMode()
 {
-  uint8_t actualHour = hourTen * 10 + hourOne;
+  uint8_t actualHour = t.hour;
 
   if (RULE_ECO_MODE_START_TIME > RULE_ECO_MODE_STOP_TIME && (actualHour >= RULE_ECO_MODE_START_TIME || actualHour < RULE_ECO_MODE_STOP_TIME))
   {
