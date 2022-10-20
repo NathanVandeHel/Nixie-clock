@@ -125,8 +125,6 @@ void setup()
   Wire.begin();
   DS3231_init(DS3231_CONTROL_INTCN);
 
-  setEcoTime();
-
   // Reading the saved rule settings on the emulated EEPROM
   RULE_HIDE_LEADING_ZERO_HOURS = rule_hide_leading_zero.read();
   RULE_TWELVE_HOURS = rule_twelve_hours.read();
@@ -200,25 +198,6 @@ void separateMinutes()
 {
   minuteTen = t.min / 10;
   minuteOne = t.min % 10;
-}
-
-void setEcoTime()
-{
-  // read the RTC
-  DS3231_get(&t);
-
-  Serial.print("RTC day (eco mode time start) : ");
-  Serial.println(t.mday);
-  Serial.print("RTC year (eco mode time stop) : ");
-  Serial.println(t.year);
-
-  RULE_ECO_MODE_START_TIME = t.mday;
-  RULE_ECO_MODE_STOP_TIME = t.year - 2000;
-
-  Serial.print(" Eco mode times set : ");
-  Serial.print(RULE_ECO_MODE_START_TIME);
-  Serial.print(" ");
-  Serial.println(RULE_ECO_MODE_STOP_TIME);
 }
 
 // Override the states of the tube in function of the mode we are currently in. Acts as a "shutter" in front of the tubes
